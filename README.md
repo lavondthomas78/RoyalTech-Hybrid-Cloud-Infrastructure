@@ -1,46 +1,24 @@
 # Royal Technology Solutions
 
-
-
-# Hybrid Cloud Infrastructure Project
-
-
+## Hybrid Cloud Infrastructure Project
 
 ![Project Status](https://img.shields.io/badge/status-completed-success)
 
-
-
 ---
 
-
-
-# Project Overview
-
-
+## Project Overview
 
 This project documents the design, implementation, migration, security, monitoring, and operational management of a hybrid enterprise infrastructure connecting an on-premises environment with Amazon Web Services (AWS).
 
-
-
 The architecture was developed as a hands-on enterprise infrastructure project for Royal Technology Solutions. It combines network infrastructure, perimeter security, encrypted hybrid connectivity, cloud services, database systems, intrusion detection, backup and recovery, and operational security processes.
-
-
 
 The project demonstrates how infrastructure components can be designed and integrated into a cohesive enterprise environment rather than operating as isolated technologies.
 
-
-
 ---
 
-
-
-# Project Objectives
-
-
+## Project Objectives
 
 The primary objectives of the project are to:
-
-
 
 - Design an enterprise-style hybrid infrastructure
 
@@ -68,184 +46,97 @@ The primary objectives of the project are to:
 
 - Validate infrastructure functionality and security controls
 
-
-
 ---
 
-
-
-# Architecture Overview
-
-
+## Architecture Overview
 
 The completed architecture is organized into six primary infrastructure layers:
 
+- Network infrastructure
+- Security
+- Cloud infrastructure
+- Data services
+- Operations and management
 
+The overall environment is represented in the architecture diagram below.
 
-```text
-
-&#x20;                   Royal Technology Solutions
-
-&#x20;                             |
-
-&#x20;                             |
-
-&#x20;                   Enterprise Architecture
-
-&#x20;                             |
-
-&#x20;       ------------------------------------------------
-
-&#x20;       |          |          |          |             |
-
-&#x20;       |          |          |          |             |
-
-&#x20;    Network    Security    Cloud      Data       Operations
-
-&#x20;       |          |          |          |             |
-
-&#x20;       ↓          ↓          ↓          ↓             ↓
-
-&#x20;   pfSense      Snort       AWS      RoyalDB      Backup / DR
-
-&#x20;   Routing      IDS        VPC       PostgreSQL   Patching
-
-&#x20;   VPN          Monitoring  EC2       RBAC         Monitoring
-
-&#x20;   VLANs        Security   RDS       Migration    Response
+![RoyalTech Hybrid Cloud Architecture](07-Diagrams/RoyalTech-Hybrid-Cloud-Architecture.png)
 
 On-Premises Infrastructure
+The on-premises environment connects to AWS using an IPsec site-to-site VPN.
 
+```text
+On-Premises
+192.168.2.0/24
+      |
+      v
+pfSense Firewall
+192.168.2.1
+      |
+      v
+IPsec Site-to-Site VPN
+      |
+      v
+AWS Virtual Private Gateway
+      |
+      v
+Royal-Cloud-VPC
+10.20.0.0/16
 
+## On-Premises Infrastructure
 
 The on-premises environment provides the foundation for the hybrid architecture.
 
-
-
 Primary infrastructure includes:
 
-
-
-pfSense firewall
-
-ROYALTYLAN network
-
-ROYALSERVERS network
-
-DNS infrastructure
-
-Windows Server infrastructure
-
-Linux infrastructure
-
-IDS/Snort security monitoring
-
-Internal services
-
-Administrative systems
-
-
-
-Current server network:
-
-
-
-ROYALSERVERS
-
-192.168.2.0/24
-
-
-
+- pfSense firewall
+- ROYALTYLAN network
+- ROYALSERVERS network
+- DNS infrastructure
+- Windows Server infrastructure
+- Linux infrastructure
+- IDS/Snort security monitoring
+- Internal services
+- Administrative systems
+Current server network: ROYALSERVERS
+IP Address 192.168.2.0/24
 Gateway: 192.168.2.1
-
-
 
 Key infrastructure systems include:
 
-
-
 System	Address	Function
-
 pfSense	192.168.2.1	Firewall / VPN Gateway
-
 IDS01	192.168.2.12	Snort IDS
-
 DNS01	192.168.2.40	DNS Services
 
-Hybrid Connectivity
-
-
+## Hybrid Connectivity
 
 The on-premises environment connects to AWS using an IPsec site-to-site VPN.
 
-
-
+```text
 On-Premises
-
 192.168.2.0/24
-
-&#x20;       |
-
-&#x20;       |
-
-&#x20;   pfSense
-
+      |
+      v
+pfSense Firewall
 192.168.2.1
-
-&#x20;       |
-
-&#x20;       |
-
-&#x20;  IPsec VPN
-
-&#x20;       |
-
-&#x20;       |
-
+      |
+      v
+IPsec Site-to-Site VPN
+      |
+      v
 AWS Virtual Private Gateway
-
-&#x20;       |
-
-&#x20;       |
-
+      |
+      v
 Royal-Cloud-VPC
-
 10.20.0.0/16
-
-
-
+```
 The VPN provides encrypted private communication between the on-premises infrastructure and the AWS VPC.
 
-
-
-AWS Cloud Infrastructure
-
-
-
-The AWS environment is deployed in:
-
-
-
-Region: us-east-2
-
-
-
-VPC:
-
-
-
-Royal-Cloud-VPC
-
-10.20.0.0/16
-
-
+## AWS Cloud Infrastructure
 
 The architecture uses two Availability Zones:
-
-
-
 us-east-2a
-
 us-east-2b
 
 Public Subnets
@@ -261,14 +152,9 @@ Private Subnets
 Subnet	CIDR	Availability Zone
 
 Royal-Private-Subnet-1	10.20.11.0/24	us-east-2a
-
 Royal-Private-Subnet-2	10.20.12.0/24	us-east-2b
 
-
-
 AWS services include:
-
-
 
 Amazon VPC
 
@@ -286,7 +172,7 @@ Internet Gateway
 
 Route Tables
 
-RoyalDB
+## RoyalDB
 
 
 
@@ -295,7 +181,6 @@ RoyalDB is the PostgreSQL relational database supporting the Royal Technology So
 
 
 The database contains entities supporting:
-
 
 
 Customers
@@ -342,7 +227,7 @@ royaldb\_tech
 
 royaldb\_readonly
 
-RoyalDB Cloud Migration
+## RoyalDB Cloud Migration
 
 
 
@@ -378,7 +263,7 @@ The AWS database is deployed privately within the Royal-Cloud-VPC architecture.
 
 
 
-Security Architecture
+## Security Architecture
 
 
 
@@ -386,180 +271,106 @@ Security is implemented through multiple layers.
 
 
 
-&#x20;                   Internet
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;                pfSense Firewall
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;               Network Segmentation
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;                 IPsec VPN
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;                AWS Security Groups
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;                Private Resources
-
-&#x20;                      |
-
-&#x20;                      ↓
-
-&#x20;                   RoyalDB
-
-
+```text
+Internet
+   |
+   v
+pfSense Firewall
+   |
+   v
+Network Segmentation
+   |
+   v
+IPsec VPN
+   |
+   v
+AWS Security Groups
+   |
+   v
+Private Resources
+   |
+   v
+RoyalDB
+```
 
 Security technologies and controls include:
 
-
-
 pfSense firewall
-
 IPsec VPN
-
 VLAN segmentation
-
 ACL controls
-
 Snort IDS
-
 PostgreSQL RBAC
-
 Least privilege
-
 TLS encryption
-
 AWS Security Groups
-
 IAM controls
-
 Backup and recovery controls
 
-Security Monitoring
-
-
+## Security Monitoring
 
 The security monitoring architecture includes an Ubuntu-based IDS host running Snort.
 
-
-
+```text
 Network Traffic
-
-&#x20;      |
-
-&#x20;      ↓
-
-pfSense
-
-&#x20;      |
-
-&#x20;      ↓
-
-IDS01
-
-&#x20;      |
-
-&#x20;      ↓
-
-Snort IDS
-
-&#x20;      |
-
-&#x20;      ↓
-
+      |
+      v
+   pfSense
+      |
+      v
+    IDS01
+      |
+      v
+  Snort IDS
+      |
+      v
 Security Alerts
-
-&#x20;      |
-
-&#x20;      ↓
-
+      |
+      v
 Monitoring / Investigation
-
-
+```
+Monitoring / Investigation
 
 Security monitoring documentation covers:
 
-
-
 IDS architecture
-
 Snort deployment
-
 Security tools
-
 Security controls
-
 Monitoring validation
-
 Future SIEM integration
 
-Operations and Management
-
-
+## Operations and Management
 
 Operational management extends the architecture beyond deployment.
 
-
-
 The operations framework includes:
 
-
-
+```text
 Backup
-
-&#x20;  ↓
-
+   |
+   v
 Disaster Recovery
-
-&#x20;  ↓
-
+   |
+   v
 Patch Management
-
-&#x20;  ↓
-
+   |
+   v
 Monitoring
-
-&#x20;  ↓
-
+   |
+   v
 Incident Response
-
-&#x20;  ↓
-
+   |
+   v
 Continuous Improvement
-
-
-
+```
 Operational documentation covers:
 
-
-
 Backup and recovery
-
 Disaster recovery
-
 Patch management
-
 Monitoring and alerting
-
 Incident response
-
 Repository Structure
 
 RoyalTech-Hybrid-Cloud-Infrastructure
@@ -648,59 +459,31 @@ Documentation Map
 
 01 — Architecture
 
-
-
 Documents the overall hybrid infrastructure design and network topology.
-
-
 
 02 — pfSense and VPN
 
-
-
 Documents firewall architecture, IPsec VPN configuration, and VPN validation.
-
-
 
 03 — AWS Infrastructure
 
-
-
 Documents AWS VPC architecture, routing, security groups, and RDS deployment.
-
-
 
 04 — RoyalDB
 
-
-
 Documents database architecture, schema, migration, validation, RBAC, and security.
-
-
 
 05 — Security Monitoring
 
-
-
 Documents Snort IDS, security tools, controls, and monitoring validation.
-
-
 
 06 — Operations and Management
 
-
-
 Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
-
-
 
 IP Addressing
 
-
-
 The primary network ranges are:
-
-
 
 Network	CIDR	Purpose
 
@@ -710,166 +493,86 @@ ROYALSERVERS	192.168.2.0/24	Infrastructure network
 
 AWS Royal-Cloud-VPC	10.20.0.0/16	Cloud infrastructure
 
-
-
 Detailed addressing information is maintained in:
-
-
 
 IP-Addressing-Plan.md
 
-Validation
-
-
+## Validation
 
 The project includes validation activities across multiple infrastructure layers.
 
-
-
 Validation areas include:
 
-
-
 Network connectivity
-
 Firewall rules
-
 IPsec VPN connectivity
-
 AWS routing
-
 Security Groups
-
 RDS deployment
-
 RoyalDB schema
-
 Database relationships
-
 Database permissions
-
 IDS deployment
-
 Security monitoring
-
 Backup and recovery procedures
-
 Operational processes
-
 Technology Stack
-
 Networking
-
 pfSense
-
 IPsec VPN
-
 IPv4 subnetting
-
 Routing
-
 VLANs
-
 ACLs
-
 OSPF
-
 HSRP
-
 DHCP
-
 DNS
-
 Cloud
-
 Amazon Web Services
-
 VPC
-
 EC2
-
 Amazon RDS
-
 Security Groups
-
 IAM
-
 Virtual Private Gateway
-
 Internet Gateway
-
 Security
-
 Snort IDS
-
 pfSense
-
 Network segmentation
-
 ACLs
-
 Least privilege
-
 TLS
-
 Vulnerability management
-
 Security monitoring
-
 Database
-
 PostgreSQL
-
 RoyalDB
-
 Relational database design
-
 RBAC
-
 Database constraints
-
 Backup and recovery
-
 AWS RDS
-
 Operations
-
 Backup and recovery
-
 Disaster recovery
-
 Patch management
-
 Monitoring and alerting
-
 Incident response
-
 Project Development Approach
-
-
 
 This environment was developed incrementally through hands-on infrastructure deployment, testing, troubleshooting, validation, and documentation.
 
-
-
 The architecture evolved from individual networking and infrastructure projects into a larger enterprise environment.
-
-
 
 The project emphasizes:
 
-
-
 Practical implementation
-
 Repeatable configuration
-
 Security by design
-
 Validation before expansion
-
 Documentation of infrastructure decisions
-
 Incremental migration toward cloud infrastructure
 
 Current Architecture Status
@@ -916,61 +619,33 @@ Architecture Diagrams	Planned
 
 Future Development
 
-
-
 Future development may include:
 
-
-
 Centralized SIEM deployment
-
 Security dashboards
-
 Automated alert response
-
 Automated vulnerability management
-
 Expanded AWS workloads
-
 Additional infrastructure services
-
 Infrastructure-as-code implementation
-
 Automated deployment pipelines
-
 Expanded disaster recovery testing
-
 Additional architecture diagrams
-
 Expanded validation evidence
 
 Project Status
 
-
-
 Hybrid Cloud Infrastructure Architecture: Complete
-
-
 
 The core infrastructure architecture, cloud migration, security monitoring, database deployment, and operational management documentation have been completed.
 
-
-
 The remaining portfolio work focuses on organizing visual evidence, final diagrams, documentation quality assurance, and continued infrastructure development.
-
-
 
 Purpose of This Repository
 
-
-
 This repository serves as the technical documentation and portfolio record for the Royal Technology Solutions hybrid infrastructure environment.
 
-
-
 It demonstrates the design and integration of networking, security, cloud infrastructure, database services, monitoring, and operational management into a unified enterprise architecture.
-
-
 
 The environment continues to provide a foundation for future infrastructure expansion and additional automation.
 
