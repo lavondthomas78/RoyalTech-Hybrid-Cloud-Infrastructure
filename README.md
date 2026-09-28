@@ -169,9 +169,6 @@ The architecture uses two Availability Zones:
 - Internet Gateway
 - Route Tables
 
-
-## RoyalDB
-
 RoyalDB is the PostgreSQL relational database supporting the Royal Technology Solutions service-ticketing architecture.
 
 The database contains entities supporting:
@@ -396,12 +393,15 @@ Documents Snort IDS, security tools, security controls, and monitoring validatio
 
 ### 06 — Operations and Management
 
+Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
+
 ### 07 — Screenshots
 
 Contains implementation evidence including AWS, RDS, Veeam, VPN, IDS, and validation screenshots.
 
 ### 08 — Diagrams
 
+Contains architecture diagrams documenting network, cloud, database, security, and recovery designs.
 Contains architecture diagrams documenting network, cloud, database, security, and recovery designs.
 
 Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
@@ -442,6 +442,13 @@ Validation areas include:
 
 ## Technology Stack
 
+ Amazon Web Services
+- VPC
+- EC2
+- Amazon RDS
+- Security Groups
+- IAM
+
 ### Networking
 
 - pfSense
@@ -454,7 +461,7 @@ Validation areas include:
 - HSRP
 - DHCP
 - DNS
-- TLS
+
 
 ### Cloud
 
@@ -475,7 +482,7 @@ Validation areas include:
 - ACLs
 - Least privilege
 - TLS
-- Vulnerability management
+- vulnerability management
 - Security monitoring
 
 ### Database
@@ -486,9 +493,7 @@ Validation areas include:
 - RBAC
 - Database constraints
 - Backup and recovery
- Amazon RDS PostgreSQL
-- Security Groups
-- IAM
+- Amazon RDS PostgreSQL
 
 ### Operations
 
