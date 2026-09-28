@@ -367,9 +367,9 @@ RoyalTech-Hybrid-Cloud-Infrastructure
 |   +-- Monitoring-and-Alerting-Operations.md
 |   +-- Patch-Management-Process.md
 |
-+-- 06-Screenshots
++-- 07-Screenshots
 |
-+-- 07-Diagrams
++-- 08-Diagrams
 ```
 
 ## Documentation Map
@@ -395,6 +395,14 @@ Documents database architecture, schema, migration, validation, RBAC, and securi
 Documents Snort IDS, security tools, security controls, and monitoring validation.
 
 ### 06 — Operations and Management
+
+### 07 — Screenshots
+
+Contains implementation evidence including AWS, RDS, Veeam, VPN, IDS, and validation screenshots.
+
+### 08 — Diagrams
+
+Contains architecture diagrams documenting network, cloud, database, security, and recovery designs.
 
 Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
 
@@ -446,6 +454,7 @@ Validation areas include:
 - HSRP
 - DHCP
 - DNS
+- TLS
 
 ### Cloud
 
@@ -477,7 +486,9 @@ Validation areas include:
 - RBAC
 - Database constraints
 - Backup and recovery
-- Amazon RDS PostgreSQL
+ Amazon RDS PostgreSQL
+- Security Groups
+- IAM
 
 ### Operations
 
@@ -500,6 +511,18 @@ The repository includes architecture diagrams documenting the major infrastructu
 | Security Monitoring Architecture | IDS, Snort, and security monitoring |
 | Backup and Disaster Recovery Architecture | Backup, recovery, and operational resilience |
 
+## Project Evidence
+
+Evidence included in this repository:
+
+- AWS deployment screenshots
+- RDS connectivity validation
+- PostgreSQL schema validation
+- Veeam backup validation
+- VPN tunnel validation
+- Snort IDS operational screenshots
+- Network architecture diagrams
+
 ## Project Status
 
 The core hybrid infrastructure architecture and supporting documentation have been completed.
@@ -519,6 +542,17 @@ The core hybrid infrastructure architecture and supporting documentation have be
 | Disaster Recovery Documentation | Complete |
 | Patch Management Documentation | Complete |
 | Incident Response Documentation | Complete |
+
+## Role
+
+Designed, implemented, configured, validated, and documented the infrastructure architecture, including:
+
+- Network engineering
+- Cloud deployment
+- Database migration
+- Security implementation
+- Backup and recovery planning
+- Operational documentation
 
 ## Future Expansion
 
