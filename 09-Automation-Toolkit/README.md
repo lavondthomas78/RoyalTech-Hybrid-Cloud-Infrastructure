@@ -1,8 +1,8 @@
-\# Royal Technology Solutions Automation Toolkit
+﻿# Royal Technology Solutions Automation Toolkit
 
 
 
-\## Purpose
+## Purpose
 
 
 
@@ -10,11 +10,11 @@ This toolkit contains administrative, validation, backup, and operational script
 
 
 
-\## Categories
+## Categories
 
 
 
-\### PowerShell
+### PowerShell
 
 
 
@@ -22,19 +22,19 @@ Windows infrastructure automation:
 
 
 
-\- Server health checks
+- Server health checks
 
-\- Virtual machine inventory
+- Virtual machine inventory
 
-\- Active Directory validation
+- Active Directory validation
 
-\- Service monitoring
+- Service monitoring
 
-\- Backup validation
+- Backup validation
 
 
 
-\### PostgreSQL
+### PostgreSQL
 
 
 
@@ -42,17 +42,17 @@ Database administration:
 
 
 
-\- RoyalDB backup
+- RoyalDB backup
 
-\- Database validation
+- Database validation
 
-\- User auditing
+- User auditing
 
-\- Health checks
+- Health checks
 
 
 
-\### AWS
+### AWS
 
 
 
@@ -60,17 +60,17 @@ Cloud operations:
 
 
 
-\- EC2 inventory
+- EC2 inventory
 
-\- RDS validation
+- RDS validation
 
-\- S3 backup verification
+- S3 backup verification
 
-\- Cloud resource reporting
+- Cloud resource reporting
 
 
 
-\## Environment
+## Environment
 
 
 
@@ -78,21 +78,21 @@ Primary platforms:
 
 
 
-\- Windows Server 2025
+- Windows Server 2025
 
-\- PostgreSQL 18
+- PostgreSQL 18
 
-\- AWS
+- AWS
 
-\- Veeam Backup
+- Veeam Backup
 
-\- VirtualBox
+- VirtualBox
 
-\- pfSense
+- pfSense
 
 
 
-\## Supported Systems
+## Supported Systems
 
 
 
@@ -100,53 +100,53 @@ This toolkit is designed to support the Royal Technology Solutions hybrid infras
 
 
 
-\### On-Premises Infrastructure
+### On-Premises Infrastructure
 
 
 
-\- Domain Controllers (DC02 / BDC02)
+- Domain Controllers (DC02 / BDC02)
 
-\- DNS Services
+- DNS Services
 
-\- DHCP Services
+- DHCP Services
 
-\- IIS Web Servers
+- IIS Web Servers
 
-\- PostgreSQL Database Servers
+- PostgreSQL Database Servers
 
-\- File Services
+- File Services
 
-\- Veeam Backup Infrastructure
-
-
-
-\### Cloud Infrastructure
+- Veeam Backup Infrastructure
 
 
 
-\- Amazon EC2
-
-\- Amazon RDS PostgreSQL
-
-\- Amazon S3 Storage
-
-\- AWS IAM Resources
+### Cloud Infrastructure
 
 
 
-\### Security Infrastructure
+- Amazon EC2
+
+- Amazon RDS PostgreSQL
+
+- Amazon S3 Storage
+
+- AWS IAM Resources
 
 
 
-\- pfSense Firewall
-
-\- IDS/IPS Monitoring
-
-\- Network Validation Tools
+### Security Infrastructure
 
 
 
-\## Author
+- pfSense Firewall
+
+- IDS/IPS Monitoring
+
+- Network Validation Tools
+
+
+
+## Author
 
 
 
@@ -155,4 +155,3 @@ LaVon Thomas
 
 
 Royal Technology Solutions Hybrid Cloud Infrastructure Project
-

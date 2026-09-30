@@ -2,7 +2,7 @@
 
 ## Hybrid Cloud Infrastructure Project
 
-![Project Status](https://img.shields.io/badge/status-completed-success)
+![Project Status](https://img.shields.io/badge/status-core%20infrastructure%20completed-blue)
 
 ---
 
@@ -364,9 +364,9 @@ RoyalTech-Hybrid-Cloud-Infrastructure
 |   +-- Monitoring-and-Alerting-Operations.md
 |   +-- Patch-Management-Process.md
 |
-+-- 07-Screenshots
++-- 06-Screenshots
 |
-+-- 08-Diagrams
++-- 07-Diagrams
 ```
 
 ## Documentation Map
@@ -395,16 +395,18 @@ Documents Snort IDS, security tools, security controls, and monitoring validatio
 
 Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
 
-### 07 — Screenshots
+### 06 — Screenshots
 
 Contains implementation evidence including AWS, RDS, Veeam, VPN, IDS, and validation screenshots.
 
-### 08 — Diagrams
+### 07 — Diagrams
 
 Contains architecture diagrams documenting network, cloud, database, security, and recovery designs.
-Contains architecture diagrams documenting network, cloud, database, security, and recovery designs.
 
-Documents backup, disaster recovery, patch management, monitoring operations, and incident response.
+### 09 — Automation Toolkit
+
+Contains PowerShell-based infrastructure validation and automation tools, including the Windows Server health-check script.
+
 
 ## IP Addressing
 
@@ -530,7 +532,7 @@ Evidence included in this repository:
 
 ## Project Status
 
-The core hybrid infrastructure architecture and supporting documentation have been completed.
+The core hybrid infrastructure architecture and supporting documentation have been completed, with ongoing expansion of automation, validation, and infrastructure capabilities.
 
 | Component | Status |
 |---|---|
