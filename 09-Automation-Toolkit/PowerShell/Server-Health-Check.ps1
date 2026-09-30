@@ -89,20 +89,34 @@ Write-Host ""
 Write-Host "Critical Services:"
 
 $Services = @(
-"DNS",
-"DHCPServer",
-"Netlogon",
-"Spooler",
-"postgresql-x64-18"
+    "DNS",
+    "DHCPServer",
+    "Netlogon",
+    "Spooler",
+    "postgresql-x64-18"
 )
 
-foreach ($Service in $Services){
+foreach ($Service in $Services) {
 
-Get-Service $Service -ErrorAction SilentlyContinue |
-Select Name,Status
+    $ServiceObject = Get-Service $Service -ErrorAction SilentlyContinue
 
+    if ($null -eq $ServiceObject) {
+
+        [PSCustomObject]@{
+            Name   = $Service
+            Status = "NOT INSTALLED"
+        }
+
+    }
+    else {
+
+        [PSCustomObject]@{
+            Name   = $ServiceObject.Name
+            Status = $ServiceObject.Status
+        }
+
+    }
 }
-
 
 Write-Host ""
 Write-Host "====================================="
