@@ -1,4 +1,4 @@
-﻿# Royal Technology Solutions
+# Royal Technology Solutions
 
 ## Hybrid Cloud Infrastructure Project
 
@@ -79,7 +79,7 @@ The completed architecture is organized into five primary infrastructure layers:
 
 The overall environment is represented in the architecture diagram below.
 
-![RoyalTech Hybrid Cloud Architecture](07-Diagrams/RoyalTech-Hybrid-Cloud-Architecture.png)
+![RoyalTech Hybrid Cloud Architecture](08-Diagrams/RoyalTech-Hybrid-Cloud-Architecture.png)
 
 ## On-Premises Infrastructure
 
@@ -364,9 +364,14 @@ RoyalTech-Hybrid-Cloud-Infrastructure
 |   +-- Monitoring-and-Alerting-Operations.md
 |   +-- Patch-Management-Process.md
 |
-+-- 06-Screenshots
++-- 07-Screenshots
 |
-+-- 07-Diagrams
++-- 08-Diagrams
+|
++-- 09-Automation-Toolkit
+|   +-- README.md
+|   +-- PowerShell
+|       +-- Server-Health-Check.ps1
 ```
 
 ## Documentation Map
