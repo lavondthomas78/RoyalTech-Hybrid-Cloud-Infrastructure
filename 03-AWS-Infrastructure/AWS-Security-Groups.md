@@ -48,11 +48,11 @@ Internet
 
 
 
-&#x20;  |
+  |
 
 
 
-&#x20;  |
+  |
 
 
 
@@ -60,11 +60,11 @@ Web Security Group
 
 
 
-&#x20;  |
+  |
 
 
 
-&#x20;  |
+  |
 
 
 
@@ -72,11 +72,11 @@ EC2 Web Servers
 
 
 
-&#x20;  |
+  |
 
 
 
-&#x20;  |
+  |
 
 
 
@@ -84,11 +84,11 @@ Private Network
 
 
 
-&#x20;  |
+  |
 
 
 
-&#x20;  |
+  |
 
 
 
@@ -96,23 +96,22 @@ Database Security Group
 
 
 
-&#x20;  |
+  |
 
 
 
-&#x20;  |
+  |
 
 
 
 Amazon RDS PostgreSQL
 
 
-
-&#x20;  |
-
+  |
 
 
-&#x20;  |
+
+  |
 
 
 
@@ -250,11 +249,11 @@ On-Premises Network
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -262,11 +261,11 @@ pfSense Firewall
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -274,11 +273,11 @@ IPsec VPN Tunnel
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -286,11 +285,11 @@ AWS Private Network
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -298,11 +297,11 @@ Royal-DB-SG
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
