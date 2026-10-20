@@ -1,309 +1,128 @@
-\# Royal Technology Solutions
+# Royal Technology Solutions
 
-\# AWS VPC Architecture Documentation
+# AWS VPC Architecture Documentation
 
-
-
-\## Overview
-
-
+## Overview
 
 This document describes the AWS cloud network architecture implemented for the Royal Technology Solutions hybrid infrastructure environment.
 
-
-
 The AWS deployment provides scalable cloud resources while maintaining secure private communication with the on-premises environment through an IPsec site-to-site VPN.
 
+---
 
+# AWS Environment
 
-\---
+## Region
 
+**Region:** `us-east-2` (Ohio)
 
+---
 
-\# AWS Environment
+# Virtual Private Cloud
 
+**Name:** `Royal-Cloud-VPC`
 
+**CIDR:** `10.20.0.0/16`
 
-\## Region us-east-2 (Ohio)
+### Purpose
 
+The VPC:
 
+- Provides isolated AWS networking
+- Hosts cloud workloads
+- Supports hybrid connectivity
+- Enables private resource communication
 
-\---
+---
 
+# VPC Architecture
 
-
-\## Virtual Private Cloud
-
-
-
-Name: Royal-Cloud-VPC
-
-CIDR: 10.20.0.0/16
-
-
-
-Purpose:
-
-
-
-\- Provides isolated AWS networking
-
-\- Hosts cloud workloads
-
-\- Supports hybrid connectivity
-
-\- Enables private resource communication
-
-
-
-\---
-
-
-
-\# VPC Architecture
-
-
-
-# AWS Network Topology
-
-## AWS Region
-
-**Region:** `us-east-2`
+## AWS Network Topology
 
 ```text
-                         AWS REGION
-                           us-east-2
-                              |
-                              v
-                    +--------------------+
-                    |   Royal-Cloud-VPC  |
-                    |    10.20.0.0/16    |
-                    +---------+----------+
-                              |
-                +-------------+-------------+
-                |                           |
-                v                           v
-        PUBLIC SUBNETS               PRIVATE SUBNETS
-        10.20.1.0/24                 10.20.11.0/24
-        10.20.2.0/24                 10.20.12.0/24
-                |                           |
-                v                           v
-           EC2 WEB SERVERS              RDS POSTGRESQL
-                                           |
-                                         RoyalDB
+                          AWS REGION
+                            us-east-2
+                               |
+                               v
+                     +--------------------+
+                     |   Royal-Cloud-VPC  |
+                     |    10.20.0.0/16    |
+                     +---------+----------+
+                               |
+                 +-------------+-------------+
+                 |                           |
+                 v                           v
+          PUBLIC SUBNETS               PRIVATE SUBNETS
+          10.20.1.0/24                 10.20.11.0/24
+          10.20.2.0/24                 10.20.12.0/24
+                 |                           |
+                 v                           v
+            EC2 WEB SERVERS              RDS POSTGRESQL
+                                             |
+                                             v
+                                           RoyalDB
+```
 
 Subnet Design
-
 Public Subnets
-
-
-
 Public subnets host internet-facing workloads.
-
-
-
 Subnet	CIDR	Availability Zone
-
 Royal-Public-Subnet-1	10.20.1.0/24	us-east-2a
-
 Royal-Public-Subnet-2	10.20.2.0/24	us-east-2b
 
 
-
-Purpose:
-
-
-
-Web servers
-
-Public applications
-
-External services
-
+Purpose
+- Web servers
+- Public applications
+- External services
 Private Subnets
-
-
-
 Private subnets host protected workloads.
-
-
-
 Subnet	CIDR	Availability Zone
-
 Royal-Private-Subnet-1	10.20.11.0/24	us-east-2a
-
 Royal-Private-Subnet-2	10.20.12.0/24	us-east-2b
 
 
-
-Purpose:
-
-
-
-Databases
-
-Internal services
-
-Protected resources
-
+Purpose
+- Databases
+- Internal services
+- Protected resources
 Internet Gateway
-
-
-
 Internet Gateway: igw-08cfbe50dd5cea3ab
-
-
-
-Purpose:
-
-
-
-Provides internet access for public subnet resources
-
-Supports public EC2 workloads
-
+Purpose
+The Internet Gateway:
+- Provides internet access for public subnet resources
+- Supports public EC2 workloads
+- Enables internet-facing services
 Virtual Private Gateway
-
-
-
 The Virtual Private Gateway provides the AWS endpoint for the hybrid VPN connection.
-
-
-
-Connected network: 192.168.2.0/24
-
-
-
-Remote AWS network:
-
-10.20.0.0/16
-
-Routing Architecture
-
-Public Route Table
-
-
-
-Name: Royal-Public-RT
-
-Route: 0.0.0.0/0 → Internet Gateway
-
-
-
-Associated subnets:
-
-10.20.1.0/24
-
-10.20.2.0/24
-
-Private Route Table
-
-
-
-Name: Royal-Private-RT
-
-
-
-Routes:
-
-10.20.0.0/16 → local
-
-192.168.2.0/24 → Virtual Private Gateway
-
-
-
-Associated subnets:
-
-10.20.11.0/24
-
-10.20.12.0/24
-
-Hybrid Connectivity
-
-
-
-Traffic path:
-
-
-
-On-Premises Network
-
-
-
+Connected On-Premises Network:
 192.168.2.0/24
-
-
-
-&#x20;       |
-
-
-
-pfSense Firewall
-
-
-
-&#x20;       |
-
-
-
-IPsec VPN Tunnel
-
-
-
-&#x20;       |
-
-
-
-AWS Virtual Private Gateway
-
-
-
-&#x20;       |
-
-
-
-Royal-Cloud-VPC
-
-
-
+AWS Network:
 10.20.0.0/16
+Routing Architecture
+Public Route Table
+Name: Royal-Public-RT
+Default Route:
+0.0.0.0/0 → Internet Gateway
+Associated Subnets
+- 10.20.1.0/24
+- 10.20.2.0/24
+Private Route Table
+Name: Royal-Private-RT
+Routes
+Destination	Target
+10.20.0.0/16	local
+192.168.2.0/24	Virtual Private Gateway
 
 
-
-Security Design
-
-
-
-AWS networking controls include:
-
-
-
-Private subnet database deployment
-
-Security groups
-
-VPN-only database access
-
-Route isolation
-
-Network segmentation
-
-Deployment Status
-
-Component	Status
-
-AWS VPC	Complete
-
-Subnet Architecture	Complete
-
-Internet Gateway	Complete
-
-VPN Gateway Connectivity	Complete
-
+Associated Subnets
+- 10.20.11.0/24
+- 10.20.12.0/24
 On-Premises Infrastructure
+The AWS architecture is integrated with the Royal Technology Solutions on-premises environment.
 pfSense Firewall
 pfSense provides the primary network-security boundary for the on-premises environment.
-Primary functions:
+Primary Functions
 - Network gateway
 - Firewall enforcement
 - Network segmentation
@@ -316,20 +135,16 @@ ROYALSERVERS Gateway:
 Network Segmentation
 The on-premises environment is divided into separate network segments.
 ROYALTYLAN
-Network:
-192.168.1.0/24
-Gateway:
-192.168.1.1
-Purpose:
+Network: 192.168.1.0/24
+Gateway: 192.168.1.1
+Purpose
 - User devices
 - Administrative systems
 - Internal clients
 ROYALSERVERS
-Network:
-192.168.2.0/24
-Gateway:
-192.168.2.1
-Purpose:
+Network: 192.168.2.0/24
+Gateway: 192.168.2.1
+Purpose
 - Infrastructure servers
 - Security services
 - Monitoring
@@ -360,12 +175,11 @@ Additional infrastructure includes:
 Security Monitoring
 Snort IDS/IPS
 The Ubuntu IDS/IPS system provides network intrusion detection and traffic analysis.
-Address:
-192.168.2.12
-Technology:
+Address: 192.168.2.12
+Technology
 - Ubuntu Server
 - Snort
-Functions:
+Functions
 - Intrusion detection
 - Network traffic inspection
 - Security analysis
@@ -373,8 +187,7 @@ Functions:
 - Security validation
 Infrastructure Monitoring
 MONO1 provides infrastructure monitoring through PRTG.
-Address:
-192.168.2.42
+Address: 192.168.2.42
 PRTG provides operational visibility into infrastructure health, services, and availability.
 Backup and Recovery
 Veeam Backup Server provides the primary backup and recovery platform for the on-premises environment.
@@ -392,6 +205,8 @@ Remote AWS Network:
 10.20.0.0/16
 Traffic Flow
 On-Premises Network
+
+```
 192.168.2.0/24
         |
         v
@@ -409,21 +224,19 @@ Royal-Cloud-VPC
         |
         v
 AWS Private Resources
+```
 
 AWS Infrastructure
 Virtual Private Cloud
-Name:
-Royal-Cloud-VPC
-CIDR:
-10.20.0.0/16
-Region:
-us-east-2
+Name: Royal-Cloud-VPC
+CIDR: 10.20.0.0/16
+Region: us-east-2
 The AWS environment uses separate public and private subnet tiers across two Availability Zones.
 AWS Public Tier
 Public Subnets
 - 10.20.1.0/24 — us-east-2a
 - 10.20.2.0/24 — us-east-2b
-Purpose:
+Purpose
 - EC2 web infrastructure
 - Public-facing workloads
 - Internet-accessible services
@@ -431,7 +244,7 @@ AWS Private Tier
 Private Subnets
 - 10.20.11.0/24 — us-east-2a
 - 10.20.12.0/24 — us-east-2b
-Purpose:
+Purpose
 - RDS PostgreSQL
 - RoyalDB
 - Protected cloud resources
@@ -439,23 +252,26 @@ Purpose:
 AWS Compute
 EC2
 The EC2 layer provides cloud-based web infrastructure.
-Workloads:
+Workloads
 - Royal-Web-01
 - Royal-Web-02
 These systems provide the public-facing cloud web tier.
 AWS Serverless Layer
 AWS Lambda
 AWS Lambda provides the serverless application layer supporting the web service.
-                AWS Web Service
-                       |
-                       v
-                    Lambda
-                       |
-                       v
-                Serverless Logic
-                       |
-                       v
-                 CloudWatch
+
+```
+              AWS Web Service
+                     |
+                     v
+                   Lambda
+                     |
+                     v
+               Serverless Logic
+                     |
+                     v
+                  CloudWatch
+```
 
 Lambda provides application execution without requiring a dedicated server for the serverless portion of the architecture.
 AWS Database Layer
@@ -503,43 +319,45 @@ Managed AI/ML Layer
 Amazon Bedrock
 Amazon Bedrock provides the managed AI/ML capability within the architecture.
 The service provides a foundation for future intelligent application functionality while maintaining integration with the broader AWS environment.
+
+```
               AWS Application Layer
                        |
                        v
                     Lambda
                        |
                        v
-                  Amazon Bedrock
+                 Amazon Bedrock
                        |
                        v
-                AI / ML Services
+                  AI / ML Services
 
 End-to-End Architecture
-                        INTERNET
-                           |
-                           v
-                      pfSense
-                           |
-              +------------+------------+
-              |                         |
-              v                         v
-        ROYALTYLAN                ROYALSERVERS
-       192.168.1.0/24            192.168.2.0/24
+                         INTERNET
+                            |
+                            v
+                         pfSense
+                            |
+                +-----------+-----------+
+                |                       |
+                v                       v
+          ROYALTYLAN              ROYALSERVERS
+         192.168.1.0/24           192.168.2.0/24
                                         |
-                         +--------------+--------------+
-                         |              |              |
-                         v              v              v
-                     Identity       Security       Operations
-                     Services       Monitoring     & Backup
-                         |              |              |
-                         +--------------+--------------+
-                                        |
-                                        v
-                                  IPsec VPN
+                           +------------+------------+
+                           |            |             |
+                           v            v             v
+                       Identity     Security      Operations
+                       Services     Monitoring    & Backup
+                           |            |             |
+                           +------------+-------------+
                                         |
                                         v
-                                  AWS VPC
-                               10.20.0.0/16
+                                   IPsec VPN
+                                        |
+                                        v
+                                    AWS VPC
+                                  10.20.0.0/16
                                         |
                          +--------------+--------------+
                          |                             |
@@ -547,21 +365,22 @@ End-to-End Architecture
                     Public Tier                  Private Tier
                          |                             |
                          v                             v
-                      EC2 Web                  RDS PostgreSQL
+                      EC2 Web                    RDS PostgreSQL
                          |                             |
                          v                             v
-                      Lambda                     RoyalDB
+                      Lambda                       RoyalDB
                          |
                          v
                     Bedrock AI/ML
                          |
                          v
-                 AWS Monitoring
+                  AWS Monitoring
                          |
-              +----------+----------+
-              |          |           |
-              v          v           v
-          CloudWatch CloudTrail VPC Flow Logs
+                  +------+------+------+
+                  |             |      |
+                  v             v      v
+              CloudWatch    CloudTrail  VPC Flow Logs
+```
 
 Security Design
 The architecture implements multiple layers of security.
@@ -643,8 +462,15 @@ The completed environment integrates:
 - VPC Flow Logs
 - Amazon Bedrock
 The architecture provides a foundation for continued development in cloud engineering, cybersecurity, automation, application infrastructure, and penetration-testing research.
-
-Route Tables	Complete
-
+Final Status
+Component	Status
+AWS VPC	Complete
+AWS Subnet Architecture	Complete
+AWS Routing	Complete
 Hybrid Routing	Complete
-
+AWS Compute	Complete
+Serverless Layer	Complete
+Database Layer	Complete
+Security Architecture	Complete
+Monitoring and Auditing	Complete
+Hybrid Cloud Architecture	Complete
