@@ -68,101 +68,99 @@ The primary goals of this architecture are:
 
 ```text
 
-&#x20;                        INTERNET
+                        INTERNET
 
-&#x20;                           |
+                           |
 
-&#x20;                           |
+                           |
 
-&#x20;                   pfSense Firewall
+                   pfSense Firewall
 
-&#x20;                   VPN Gateway
+                   VPN Gateway
 
-&#x20;                           |
+                           |
 
-&#x20;                           |
+                           |
 
-&#x20;             ----------------------------
+             ----------------------------
 
-&#x20;             |
+             |
 
-&#x20;             |
+             |
 
-&#x20;       ROYALSERVERS Network
+       ROYALSERVERS Network
 
-&#x20;         192.168.2.0/24
+         192.168.2.0/24
 
-&#x20;             |
+             |
 
-&#x20;      ---------------------
+      ---------------------
 
-&#x20;      |                   |
+      |                   |
 
-&#x20;    IDS01               DNS01
+    IDS01               DNS01
 
-&#x20; 192.168.2.12       192.168.2.20
+ 192.168.2.12       192.168.2.20
+      |
+      |
 
-&#x20;      |
-
-&#x20;      |
-
-&#x20;   Snort IDS
+   Snort IDS
 
 
 
 
 
-&#x20;             IPsec Site-to-Site VPN
+             IPsec Site-to-Site VPN
 
 
 
-&#x20;                        |
+                        |
 
-&#x20;                        |
-
-
-
-&#x20;             AWS Virtual Private Gateway
+                        |
 
 
 
-&#x20;                        |
-
-&#x20;                        |
+             AWS Virtual Private Gateway
 
 
 
-&#x20;             Royal-Cloud-VPC
+                        |
 
-&#x20;                10.20.0.0/16
-
-
-
-&#x20;       --------------------------------
-
-&#x20;       |                              |
-
-&#x20;  Public Subnets              Private Subnets
-
-&#x20;  10.20.1.0/24                10.20.11.0/24
-
-&#x20;  10.20.2.0/24                10.20.12.0/24
+                        |
 
 
 
-&#x20;                                     |
+             Royal-Cloud-VPC
 
-&#x20;                                     |
-
-
-
-&#x20;                             Amazon RDS PostgreSQL
+                10.20.0.0/16
 
 
 
-&#x20;                                 RoyalDB
+       --------------------------------
 
-&#x20;                             10.20.11.48
+       |                              |
+
+;  Public Subnets              Private Subnets
+
+  10.20.1.0/24                10.20.11.0/24
+
+  10.20.2.0/24                10.20.12.0/24
+
+
+
+                                     |
+
+                                     |
+
+
+
+                             Amazon RDS PostgreSQL
+
+
+
+                                 RoyalDB
+
+                             10.20.11.48
 
 
 
@@ -306,27 +304,27 @@ Traffic Flow:
 
 On-Premises Network
 
-&#x20;       |
+       |
 
-&#x20;       |
+       |
 
 pfSense Firewall
 
-&#x20;       |
+       |
 
-&#x20;       |
+       |
 
 IPsec VPN Tunnel
 
-&#x20;       |
+       |
 
-&#x20;       |
+       |
 
 AWS Virtual Private Gateway
 
-&#x20;       |
+       |
 
-&#x20;       |
+       |
 
 AWS Private Resources
 
