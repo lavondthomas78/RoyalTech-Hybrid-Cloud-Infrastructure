@@ -41,6 +41,7 @@ The VPN provides encrypted private communication between the on-premises Royalty
                         v
                  Royal-Cloud-VPC
                    10.20.0.0/16
+```
 
 pfSense Role
 pfSense provides the on-premises endpoint for the hybrid VPN connection.
@@ -105,6 +106,8 @@ This routing configuration allows private communication between the on-premises 
 Hybrid Connectivity
 The complete connectivity path is:
 On-Premises Network
+
+```
 192.168.2.0/24
         |
         v
@@ -150,6 +153,7 @@ RDS PostgreSQL
       |
       v
 RoyalDB
+```
 
 The database remains within the AWS private subnet architecture and is accessed through the hybrid network connection.
 VPN Security Design
