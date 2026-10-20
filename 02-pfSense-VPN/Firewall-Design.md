@@ -256,6 +256,8 @@ Security Monitoring Integration	Complete
 
 
 Security Architecture Summary
+
+```
                          INTERNET
                             |
                             v
@@ -295,6 +297,8 @@ Security Architecture Summary
                               |
                               v
                            RoyalDB
+                           ```
+                           
 
 Status
 Component	Status
