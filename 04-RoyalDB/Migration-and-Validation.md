@@ -103,6 +103,7 @@ The backup provided the database package used to migrate RoyalDB into the AWS en
                     |
                     v
                  RoyalDB
+```
 
 Schema Migration Validation
 The following database objects were validated following migration:
@@ -117,7 +118,7 @@ ticket_assignment	Complete
 
 
 Data Validation
-Validated row counts:
+Validated Row Counts
 Table	Records
 customer	3
 location	3
@@ -138,33 +139,40 @@ The migrated database was validated for:
 - Table relationships
 Important Constraint
 technician_email UNIQUE
-
 This constraint prevents duplicate technician email addresses.
 Foreign Key Relationships
+
+```
+
 contract.customer_id
         |
         v
 customer.customer_id
+
 
 location.customer_id
         |
         v
 customer.customer_id
 
+
 device.location_id
         |
         v
 location.location_id
+
 
 ticket_assignment.ticket_id
         |
         v
 ticket.ticket_id
 
+
 ticket_assignment.technician_id
         |
         v
 technician.technician_id
+```
 
 These relationships maintain referential integrity between the related database entities.
 Connectivity Validation
@@ -179,6 +187,8 @@ Validation Result
 Private AWS database connectivity confirmed.
 This test confirmed successful network connectivity to the PostgreSQL service hosted within the private AWS subnet.
 Hybrid Database Architecture
+
+```
                     Administrator
                          |
                          v
@@ -204,6 +214,7 @@ Hybrid Database Architecture
                          |
                          v
                       RoyalDB
+```
 
 The architecture allows authorized on-premises systems to communicate with the private AWS database through the encrypted hybrid connection.
 Migration Results
@@ -218,6 +229,8 @@ RoyalDB Validation	Complete
 
 
 Migration Validation Summary
+
+```
 Source Database
 PostgreSQL 18.6
       |
@@ -244,6 +257,7 @@ Connectivity Validation
       |
       v
 RoyalDB Operational
+```
 
 Final Status
 OPERATIONAL / COMPLETE
