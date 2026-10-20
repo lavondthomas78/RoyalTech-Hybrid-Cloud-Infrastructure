@@ -35,6 +35,7 @@ Database Permissions
         |
         v
 RoyalDB Objects
+```
 
 This layered approach separates authentication, authorization, and database resource access.
 PostgreSQL Roles
@@ -85,6 +86,8 @@ The read-only role prevents authorized reporting users from modifying database i
 Least Privilege Model
 RoyalDB follows the principle of least privilege.
 Users receive only the permissions required for their responsibilities.
+
+```
 Database Administrator
         |
         v
@@ -110,6 +113,7 @@ royaldb_readonly
         |
         v
 Read-Only Access
+```
 
 This separation limits unnecessary access and reduces the potential impact of unauthorized or accidental database changes.
 Database Ownership
@@ -125,20 +129,20 @@ Database ownership is separate from the operational roles used for normal databa
 Data Protection Controls
 RoyalDB implements security controls across authentication, authorization, encryption, and network architecture.
 Authentication
-Implemented controls:
+Implemented Controls
 - PostgreSQL authentication
 - User-based database access
 - Role assignment
 Authentication establishes the identity of users accessing the database.
 Authorization
-Implemented controls:
+Implemented Controls
 - RBAC permissions
 - Database roles
 - Object-level privileges
 - Least-privilege access
 Authorization determines what authenticated users are permitted to do within RoyalDB.
 Encryption
-Implemented protections include:
+Implemented Protections
 - TLS database connections
 - Encrypted VPN communication
 - Private AWS database deployment
@@ -146,6 +150,8 @@ These controls protect database communications at both the database and network 
 Hybrid Cloud Security
 RoyalDB operates within the broader hybrid cloud security architecture.
 Database Access Path
+
+```
               On-Premises Administrator
                          |
                          v
@@ -165,9 +171,12 @@ Database Access Path
                          |
                          v
                        RoyalDB
+```
 
 The private database deployment and VPN connectivity provide protected network access between the on-premises environment and AWS.
 Layered RoyalDB Security Model
+
+```
                     User / Application
                            |
                            v
@@ -188,6 +197,7 @@ Layered RoyalDB Security Model
                            |
                            v
                      RoyalDB Objects
+```
 
 The layered model provides controlled access based on the responsibilities of each database user.
 Security Validation
@@ -227,4 +237,3 @@ Final Status
 OPERATIONAL / COMPLETE
 The RoyalDB Role-Based Access Control and security model has been implemented and validated.
 The completed security architecture provides differentiated access for database administrators, technical personnel, and read-only users while integrating RoyalDB with the private hybrid cloud security architecture.
-```
