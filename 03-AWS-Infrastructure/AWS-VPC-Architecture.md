@@ -64,59 +64,33 @@ Purpose:
 
 
 
+# AWS Network Topology
+
+## AWS Region
+
+**Region:** `us-east-2`
+
 ```text
-
-&#x20;                AWS Region
-
-&#x20;                us-east-2
-
-
-
-&#x20;                    |
-
-
-
-&#x20;            Royal-Cloud-VPC
-
-
-
-&#x20;             10.20.0.0/16
-
-
-
-&#x20;                    |
-
-
-
-&#x20;       --------------------------------
-
-
-
-&#x20;       |                              |
-
-
-
-&#x20;  Public Subnets              Private Subnets
-
-
-
-&#x20;  10.20.1.0/24                10.20.11.0/24
-
-
-
-&#x20;  10.20.2.0/24                10.20.12.0/24
-
-
-
-&#x20;       |                              |
-
-
-
-&#x20;    EC2 Web                    RDS PostgreSQL
-
-
-
-&#x20;    Servers                    RoyalDB
+                         AWS REGION
+                           us-east-2
+                              |
+                              v
+                    +--------------------+
+                    |   Royal-Cloud-VPC  |
+                    |    10.20.0.0/16    |
+                    +---------+----------+
+                              |
+                +-------------+-------------+
+                |                           |
+                v                           v
+        PUBLIC SUBNETS               PRIVATE SUBNETS
+        10.20.1.0/24                 10.20.11.0/24
+        10.20.2.0/24                 10.20.12.0/24
+                |                           |
+                v                           v
+           EC2 WEB SERVERS              RDS POSTGRESQL
+                                           |
+                                         RoyalDB
 
 Subnet Design
 
