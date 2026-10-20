@@ -69,6 +69,12 @@ The completed architecture is organized across five major layers:
 4. Data services
 5. Operations and management
 
+## Architecture Diagram
+
+![Royal Technology Solutions Hybrid Cloud Architecture](08-Diagrams/RoyalTech-Hybrid-Cloud-Architecture.png)
+
+The architecture integrates the on-premises Royalty.Local environment with AWS through an encrypted IPsec Site-to-Site VPN. The design combines enterprise networking, security, monitoring, database services, cloud infrastructure, serverless computing, and managed AI/ML capabilities.
+
 ## Finished-Product Architecture
 
 ```text
