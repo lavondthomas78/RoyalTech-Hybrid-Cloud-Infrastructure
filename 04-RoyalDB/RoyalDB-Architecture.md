@@ -67,6 +67,7 @@ The logical database design consists of seven primary entities.
                     |
                     v
                 Technician
+```
 
 The design separates major business entities while maintaining the relationships required for IT service management.
 Database Entities
@@ -83,7 +84,7 @@ Primary Key:
 location_id
 Foreign Key:
 customer_id
-Relationship:
+Relationship
 location.customer_id
         |
         v
@@ -96,7 +97,7 @@ Primary Key:
 device_id
 Foreign Key:
 location_id
-Relationship:
+Relationship
 device.location_id
         |
         v
@@ -109,7 +110,7 @@ Primary Key:
 contract_id
 Foreign Key:
 customer_id
-Relationship:
+Relationship
 contract.customer_id
         |
         v
@@ -137,7 +138,9 @@ ticket_assignment_id
 Foreign Keys:
 - ticket_id
 - technician_id
-Relationship:
+Relationship
+
+```
 Ticket
    |
    v
@@ -145,6 +148,7 @@ Ticket_Assignment
    |
    v
 Technician
+```
 
 This structure allows support tickets to be associated with technicians while maintaining relational integrity.
 Data Integrity
@@ -185,6 +189,8 @@ Permissions:
 - SELECT permissions only
 This role prevents reporting users from modifying database information.
 Database Security Model
+
+```
                     Users / Applications
                             |
                             v
@@ -205,11 +211,14 @@ Database Security Model
                             |
                             v
                        RoyalDB Objects
+```
 
 The security model follows least-privilege and separation-of-duties principles.
 Cloud Migration Architecture
 RoyalDB was migrated from the on-premises PostgreSQL environment to Amazon RDS PostgreSQL.
 Migration Path
+
+```
              On-Premises PostgreSQL
                     |
                     v
@@ -230,10 +239,13 @@ Migration Path
                     |
                     v
                  RoyalDB
+```
 
 Hybrid Database Architecture
 After migration, RoyalDB operates within the hybrid cloud architecture.
                  On-Premises Network
+
+```
                   192.168.2.0/24
                          |
                          v
@@ -255,9 +267,12 @@ After migration, RoyalDB operates within the hybrid cloud architecture.
                          |
                          v
                       RoyalDB
+```
 
 This architecture allows authorized on-premises systems to communicate with the private AWS database through the encrypted hybrid connection.
 Database Architecture Summary
+
+```
                     Royal Technology Solutions
                               |
                               v
@@ -276,7 +291,7 @@ Database Architecture Summary
                                                |
                                                v
                                            Technicians
-
+```
 RoyalDB provides the centralized data foundation for the organization's IT service-management architecture.
 Current Status
 Component	Status
@@ -308,4 +323,3 @@ The architecture provides:
 - Amazon RDS PostgreSQL deployment
 - Private hybrid cloud connectivity
 RoyalDB provides the backend data foundation for future IT service-management application development.
-```
