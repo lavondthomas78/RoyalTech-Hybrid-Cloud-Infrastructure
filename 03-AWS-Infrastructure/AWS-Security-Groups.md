@@ -42,81 +42,39 @@ Traffic flow:
 
 
 
+# AWS Security Groups and Database Security
+
+## Security Architecture
+
+The AWS architecture uses Security Groups to control network access between public-facing web workloads and protected database resources.
+
 ```text
-
-Internet
-
-
-
-  |
-
-
-
-  |
-
-
-
-Web Security Group
-
-
-
-  |
-
-
-
-  |
-
-
-
-EC2 Web Servers
-
-
-
-  |
-
-
-
-  |
-
-
-
-Private Network
-
-
-
-  |
-
-
-
-  |
-
-
-
-Database Security Group
-
-
-
-  |
-
-
-
-  |
-
-
-
-Amazon RDS PostgreSQL
-
-
-  |
-
-
-
-  |
-
-
-
-RoyalDB
-
+                         INTERNET
+                            |
+                            v
+                    +----------------+
+                    | Royal-Web-SG   |
+                    +--------+-------+
+                             |
+                             v
+                    +----------------+
+                    |  EC2 Web       |
+                    |  Servers       |
+                    +--------+-------+
+                             |
+                             v
+                     PRIVATE NETWORK
+                             |
+                             v
+                    +----------------+
+                    | Royal-DB-SG    |
+                    +--------+-------+
+                             |
+                             v
+                    +----------------+
+                    | RDS PostgreSQL |
+                    |    RoyalDB     |
+                    +----------------+
 Royal-Web-SG
 
 
