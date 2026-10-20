@@ -1,388 +1,120 @@
-\# Royal Technology Solutions
+# Royal Technology Solutions
 
-\# Hybrid Cloud Architecture Overview
+# Hybrid Cloud Architecture Overview
 
-
-
-\## Project Overview
-
-
+## Project Overview
 
 Royal Technology Solutions Hybrid Cloud Infrastructure is an enterprise-style architecture designed to connect an on-premises environment with Amazon Web Services (AWS).
 
-
-
-The solution integrates local infrastructure, security monitoring, encrypted VPN connectivity, cloud networking, and managed database services.
-
-
+The solution integrates local infrastructure, security monitoring, encrypted VPN connectivity, cloud networking, managed database services, serverless computing, cloud monitoring, and managed AI/ML capabilities.
 
 The project demonstrates:
 
+- Hybrid cloud design
+- Enterprise network segmentation
+- Secure site-to-site connectivity
+- Cloud infrastructure deployment
+- Database migration
+- Security monitoring
+- Backup and recovery
+- Serverless application services
+- Cloud monitoring and auditing
+- Managed AI/ML integration
 
+---
 
-\- Hybrid cloud design
-
-\- Network segmentation
-
-\- Secure site-to-site connectivity
-
-\- Cloud infrastructure deployment
-
-\- Database migration
-
-\- Security monitoring
-
-
-
-\---
-
-
-
-\# Architecture Goals
-
-
+# Architecture Goals
 
 The primary goals of this architecture are:
 
+- Provide secure communication between on-premises and cloud environments
+- Host scalable workloads in cloud infrastructure
+- Maintain private access to sensitive resources
+- Implement security monitoring and network controls
+- Provide centralized database services
+- Establish backup and recovery capabilities
+- Create a foundation for future application expansion
 
+---
 
-\- Provide secure communication between on-premises and cloud environments
-
-\- Host critical services in scalable cloud infrastructure
-
-\- Maintain private access to sensitive resources
-
-\- Implement security monitoring and network controls
-
-\- Create a foundation for future application expansion
-
-
-
-\---
-
-
-
-\# High-Level Architecture
-
-
+# High-Level Architecture
 
 ```text
-
-                        INTERNET
-
-                           |
-
-                           |
-
-                   pfSense Firewall
-
-                   VPN Gateway
-
-                           |
-
-                           |
-
-             ----------------------------
-
+                              INTERNET
+                                  |
+                                  v
+                         +----------------+
+                         |    pfSense     |
+                         | Firewall/Router|
+                         |  VPN Endpoint  |
+                         +-------+--------+
+                                 |
+                    +------------+------------+
+                    |                         |
+                    v                         v
+             ROYALTYLAN                  ROYALSERVERS
+           192.168.1.0/24               192.168.2.0/24
+                                             |
+             +-------------------------------+-------------------------------+
+             |              |                |              |                 |
+             v              v                v              v                 v
+            DC02           BDC02           DHCP02         DNS01             WEB01
+         AD / DNS       Domain Controller    DHCP      DNS Infrastructure      IIS
+         .2.20             .2.22                          .2.40
              |
-
-             |
-
-       ROYALSERVERS Network
-
-         192.168.2.0/24
-
-             |
-
-      ---------------------
-
-      |                   |
-
-    IDS01               DNS01
-
- 192.168.2.12       192.168.2.20
-      |
-      |
-
-   Snort IDS
-
-
-
-
-
+             +------------------+-------------------+----------------+
+             |                  |                   |                |
+             v                  v                   v                v
+           FS01              FTP01            APPServer01         RoyalDB
+       File Services         FTPS               Application       PostgreSQL
+             |                  |                   |                |
+             +------------------+-------------------+----------------+
+                                |
+                    +-----------+-----------+
+                    |                       |
+                    v                       v
+              IDS/IPS Ubuntu            MONO1 / PRTG
+                .2.12                     .2.42
+                 Snort                  Monitoring
+                    |
+                    |
+             Veeam Backup Server
+                    |
+                    |
              IPsec Site-to-Site VPN
-
-
-
-                        |
-
-                        |
-
-
-
-             AWS Virtual Private Gateway
-
-
-
-                        |
-
-                        |
-
-
-
-             Royal-Cloud-VPC
-
-                10.20.0.0/16
-
-
-
-       --------------------------------
-
-       |                              |
-
-;  Public Subnets              Private Subnets
-
-  10.20.1.0/24                10.20.11.0/24
-
-  10.20.2.0/24                10.20.12.0/24
-
-
-
-                                     |
-
-                                     |
-
-
-
-                             Amazon RDS PostgreSQL
-
-
-
-                                 RoyalDB
-
-                             10.20.11.48
-
-
-
-On-Premises Infrastructure
-
-pfSense Firewall
-
-
-
-Role:
-
-
-
-Network gateway
-
-Firewall enforcement
-
-VPN endpoint
-
-Traffic control
-
-
-
-Network: 192.168.2.0/24
-
-
-
-IDS01
-
-
-
-Hostname: ids.royalty.local
-
-
-
-IP Address: 192.168.2.12
-
-
-
-Purpose:
-
-
-
-Network intrusion detection
-
-Security monitoring
-
-Traffic analysis
-
-
-
-Technology:
-
-
-
-Ubuntu Server
-
-Snort IDS
-
-
-
-AWS Infrastructure
-
-Virtual Private Cloud
-
-
-
-Name: Royal-Cloud-VPC
-
-
-
-CIDR: 10.20.0.0/16
-
-
-
-Region: us-east-2
-
-
-
-AWS Services
-
-
-
-Implemented services:
-
-
-
-EC2
-
-
-
-Purpose:
-
-
-
-Web infrastructure
-
-Public-facing workloads
-
-Amazon RDS PostgreSQL
-
-
-
-Purpose:
-
-
-
-Managed database hosting
-
-RoyalDB production environment
-
-
-
-Database: royaldb
-
-
-
-Private Address: 10.20.11.48
-
-
-
-Hybrid Connectivity
-
-
-
-Connectivity between environments is provided through an IPsec site-to-site VPN.
-
-
-
-Local Network: 192.168.2.0/24
-
-
-
-Remote AWS Network: 10.20.0.0/16
-
-
-
-Traffic Flow: 
-
-
-
-On-Premises Network
-
-       |
-
-       |
-
-pfSense Firewall
-
-       |
-
-       |
-
-IPsec VPN Tunnel
-
-       |
-
-       |
-
-AWS Virtual Private Gateway
-
-       |
-
-       |
-
-AWS Private Resources
-
-
-
-Security Design
-
-
-
-Security controls implemented:
-
-
-
-Network segmentation
-
-Firewall enforcement
-
-IPsec encryption
-
-Private database deployment
-
-Security groups
-
-Database role-based access control
-
-IDS monitoring
-
-Current Validation Status
-
-Component	Status
-
-pfSense VPN	Complete
-
-AWS VPC	Complete
-
-RDS Deployment	Complete
-
-RoyalDB Migration	Complete
-
-Database Validation	Complete
-
-IDS Deployment	Complete
-
-Future Expansion
-
-
-
-Planned additions:
-
-
-
-Application/API tier
-
-Enterprise monitoring
-
-Automated backups
-
-Additional AWS workloads
-
-Expanded security operations
-
+                    |
+                    v
+           AWS Virtual Private Gateway
+                    |
+                    v
+            +----------------------+
+            |   Royal-Cloud-VPC    |
+            |    10.20.0.0/16      |
+            +----------+-----------+
+                       |
+             +---------+---------+
+             |                   |
+             v                   v
+       PUBLIC SUBNETS       PRIVATE SUBNETS
+       10.20.1.0/24         10.20.11.0/24
+       10.20.2.0/24         10.20.12.0/24
+             |                   |
+             v                   v
+          EC2 Web           RDS PostgreSQL
+          Servers              RoyalDB
+             |
+             v
+          Lambda
+        Web Service
+             |
+             v
+         Bedrock
+          AI / ML
+             |
+             v
+        CloudWatch
+             |
+       +-----+------+
+       |            |
+       v            v
+   CloudTrail   VPC Flow Logs
