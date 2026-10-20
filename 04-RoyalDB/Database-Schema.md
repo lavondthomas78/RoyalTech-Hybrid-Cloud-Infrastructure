@@ -54,6 +54,7 @@ The database follows relational database design principles using:
                     |
                     v
                 Technician
+```
 
 The schema separates customer, location, asset, contract, ticket, and technician information into related entities.
 The Ticket_Assignment table provides the relationship between service tickets and technicians.
@@ -136,6 +137,8 @@ Foreign Keys:
 - ticket_id
 - technician_id
 Relationship
+
+```
 Ticket
    |
    v
@@ -143,6 +146,7 @@ Ticket_Assignment
    |
    v
 Technician
+```
 
 The assignment table allows technicians to be associated with service tickets while maintaining the relational structure of the database.
 Primary Keys
@@ -171,14 +175,13 @@ ticket_assignment	technician_id	technician
 Sequence Management
 The database uses PostgreSQL sequences to generate numeric identifiers.
 Implemented Sequences
-customer_id_seq
-location_id_seq
-device_id_seq
-contract_id_seq
-ticket_id_seq
-technician_id_seq
-ticket_assignment_id_seq
-
+- customer_id_seq
+- location_id_seq
+- device_id_seq
+- contract_id_seq
+- ticket_id_seq
+- technician_id_seq
+- ticket_assignment_id_seq
 Sequence-generated identifiers provide consistent numeric primary keys for the database entities.
 Database Constraints
 The schema implements multiple constraint types to protect data integrity.
@@ -189,17 +192,18 @@ Foreign keys maintain valid relationships between parent and child records.
 Unique Constraints
 The following unique constraint is implemented:
 technician_email UNIQUE
-
 This prevents duplicate technician email addresses.
 Referential Integrity
 The foreign key relationships help prevent invalid relationships and orphaned records.
 The schema enforces relationships between:
+
+```
 Customer
    |
    +---- Location
    |
    +---- Contract
-         
+
 
 Location
    |
@@ -211,6 +215,7 @@ Ticket
    +---- Ticket_Assignment
                     |
                     +---- Technician
+```
 
 These relationships provide the structural foundation for the RoyalDB service-management database.
 Data Integrity
@@ -234,6 +239,8 @@ ticket_assignment	4
 
 Database Relationship Summary
 The primary relationships can be represented as:
+
+```
 Customer
    |
    +--------------------+
@@ -252,6 +259,7 @@ Ticket_Assignment
    |
    v
 Technician
+```
 
 This design separates major business entities while maintaining the relationships required for IT service-management operations.
 Database Design Summary
