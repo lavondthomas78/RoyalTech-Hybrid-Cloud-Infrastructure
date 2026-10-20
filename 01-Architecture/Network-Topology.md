@@ -38,35 +38,35 @@ The topology provides:
 
 ```text
 
-&#x20;                        INTERNET
+                        INTERNET
 
-&#x20;                           |
+                           |
 
-&#x20;                           |
+                           |
 
-&#x20;                   pfSense Firewall
+                   pfSense Firewall
 
-&#x20;                   FW01-RoyalServers
+                   FW01-RoyalServers
 
-&#x20;                           |
+                           |
 
-&#x20;           --------------------------------
+           --------------------------------
 
-&#x20;           |
+           |
 
-&#x20;           |
+           |
 
-&#x20;      On-Premises Network
+      On-Premises Network
 
 
 
-&#x20;           |
+           |
 
-&#x20;           |
+          |
 
-&#x20;   -------------------------
+   -------------------------
 
-&#x20;   |                       |
+   |                       |
 
 &#x20;ROYALTYLAN            ROYALSERVERS
 
@@ -74,23 +74,23 @@ The topology provides:
 
 
 
-&#x20;                           |
+                           |
 
-&#x20;            --------------------------------
+            --------------------------------
 
-&#x20;            |                              |
+            |                              |
 
-&#x20;           IDS01                         DNS01
+           IDS01                         DNS01
 
-&#x20;       192.168.2.12                  192.168.2.20
+       192.168.2.12                  192.168.2.20
 
 
 
-&#x20;            |
+            |
 
-&#x20;            |
+           |
 
-&#x20;       Snort IDS Monitoring
+       Snort IDS Monitoring
 
 
 
@@ -220,11 +220,11 @@ On-Premises Network
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -232,11 +232,11 @@ pfSense Firewall
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -244,11 +244,11 @@ IPsec VPN Tunnel
 
 
 
-&#x20;       |
+      |
 
 
 
-&#x20;       |
+      |
 
 
 
@@ -256,11 +256,11 @@ AWS Virtual Private Gateway
 
 
 
-&#x20;       |
+       |
 
 
 
-&#x20;       |
+       |
 
 
 
@@ -346,7 +346,7 @@ Administrator
 
 
 
-&#x20;     |
+     |
 
 
 
@@ -358,7 +358,7 @@ On-Premises Network
 
 
 
-&#x20;     |
+     |
 
 
 
@@ -366,7 +366,7 @@ pfSense Firewall
 
 
 
-&#x20;     |
+     |
 
 
 
@@ -374,15 +374,14 @@ IPsec VPN
 
 
 
-&#x20;     |
+     |
 
 
 
 AWS VPC
 
 
-
-&#x20;     |
+      |
 
 
 
@@ -394,7 +393,7 @@ RDS PostgreSQL
 
 
 
-&#x20;     |
+     |
 
 
 
