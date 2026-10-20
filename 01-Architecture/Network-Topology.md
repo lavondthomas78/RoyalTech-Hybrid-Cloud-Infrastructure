@@ -1,457 +1,82 @@
-\# Royal Technology Solutions
+# Royal Technology Solutions
 
-\# Network Topology Documentation
+# Network Topology Documentation
 
-
-
-\## Overview
-
-
+## Overview
 
 The Royal Technology Solutions hybrid infrastructure uses a segmented enterprise network design connecting on-premises resources with Amazon Web Services (AWS).
 
-
-
 The topology provides:
 
+- Network segmentation
+- Secure cloud connectivity
+- Private database access
+- Security monitoring
+- Backup and recovery
+- Future infrastructure expansion
 
+---
 
-\- Network segmentation
-
-\- Secure cloud connectivity
-
-\- Private database access
-
-\- Security monitoring
-
-\- Future infrastructure expansion
-
-
-
-\---
-
-
-
-\# Logical Network Topology
-
-
+# Logical Network Topology
 
 ```text
-
-                        INTERNET
-
-                           |
-
-                           |
-
-                   pfSense Firewall
-
-                   FW01-RoyalServers
-
-                           |
-
-           --------------------------------
-
-           |
-
-           |
-
-      On-Premises Network
-
-
-
-           |
-
-          |
-
-   -------------------------
-
-   |                       |
-
-&#x20;ROYALTYLAN            ROYALSERVERS
-
-192.168.1.0/24        192.168.2.0/24
-
-
-
-                           |
-
-            --------------------------------
-
-            |                              |
-
-           IDS01                         DNS01
-
-       192.168.2.12                  192.168.2.20
-
-
-
-            |
-
-           |
-
-       Snort IDS Monitoring
-
-
-
-On-Premises Network Design
-
-pfSense Firewall
-
-
-
-The pfSense firewall provides:
-
-
-
-Internet gateway functionality
-
-Firewall enforcement
-
-Network segmentation
-
-IPsec VPN connectivity
-
-
-
-Primary server network gateway: 192.168.2.1
-
-
-
-Network Segments
-
-ROYALTYLAN
-
-
-
-Purpose:
-
-
-
-User devices
-
-Administrative systems
-
-Internal clients
-
-
-
-Network: 192.168.1.0/24
-
-Gateway: 192.168.1.1
-
-
-
-Purpose:
-
-
-
-Infrastructure servers
-
-Security tools
-
-Cloud connectivity
-
-
-
-Network: 192.168.2.0/24
-
-Gateway: 192.168.2.1
-
-
-
-Infrastructure Services
-
-IDS01
-
-
-
-Hostname: ids.royalty.local
-
-Address: 192.168.2.12
-
-
-
-Role: 
-
-
-
-Intrusion detection
-
-Network monitoring
-
-Snort security analysis
-
-
-
-DNS01
-
-
-
-Address: 192.168.2.20
-
-
-
-Role:
-
-
-
-Internal name resolution
-
-Infrastructure service discovery
-
-Hybrid Cloud Connectivity
-
-
-
-The on-premises environment connects to AWS using an IPsec site-to-site VPN.
-
-
-
-Traffic flow:
-
-
-
-On-Premises Network
-
-
-
-192.168.2.0/24
-
-
-
-       |
-
-
-
-       |
-
-
-
-pfSense Firewall
-
-
-
-       |
-
-
-
-       |
-
-
-
-IPsec VPN Tunnel
-
-
-
-      |
-
-
-
-      |
-
-
-
-AWS Virtual Private Gateway
-
-
-
-       |
-
-
-
-       |
-
-
-
-AWS VPC
-
-
-
-10.20.0.0/16
-
-
-
-AWS Network Topology
-
-
-
-VPC
-
-
-
-Name: Royal-Cloud-VPC
-
-
-
-CIDR: 10.20.0.0/16
-
-
-
-Region: us-east-2
-
-
-
-AWS Subnet Design
-
-Public Tier
-
-
-
-Used for internet-accessible workloads.
-
-
-
-10.20.1.0/24
-
-10.20.2.0/24
-
-
-
-Components:
-
-
-
-EC2 web servers
-
-Public-facing services
-
-Private Tier
-
-
-
-Used for protected workloads.
-
-
-
-10.20.11.0/24
-
-10.20.12.0/24
-
-
-
-Components:
-
-
-
-Database services
-
-Internal cloud resources
-
-Database Connectivity Path
-
-
-
-Administrator
-
-
-
-     |
-
-
-
-On-Premises Network
-
-
-
-192.168.2.0/24
-
-
-
-     |
-
-
-
-pfSense Firewall
-
-
-
-     |
-
-
-
-IPsec VPN
-
-
-
-     |
-
-
-
-AWS VPC
-
-
-      |
-
-
-
-RDS PostgreSQL
-
-
-
-10.20.11.48
-
-
-
-     |
-
-
-
-RoyalDB
-
-
-
-Security Boundaries
-
-
-
-The architecture separates:
-
-
-
-Segment	Purpose
-
-ROYALTYLAN	User access
-
-ROYALSERVERS	Infrastructure services
-
-AWS Public Subnets	Public workloads
-
-AWS Private Subnets	Protected workloads
-
-Validation
-
-
-
-The topology has been validated through:
-
-
-
-Successful IPsec tunnel establishment
-
-Private AWS routing
-
-PostgreSQL connectivity
-
-RoyalDB migration validation
-
-IDS connectivity testing
-
-Status
-
-Component	Status
-
-pfSense Firewall	Complete
-
-ROYALSERVERS Network	Complete
-
-IDS Deployment	Complete
-
-AWS VPN Connectivity	Complete
-
-AWS Network Routing	Complete
-
-
-
-
-
+                              INTERNET
+                                  |
+                                  v
+                         +----------------+
+                         |    pfSense     |
+                         | Firewall/Router|
+                         |  VPN Endpoint  |
+                         +-------+--------+
+                                 |
+                    +------------+------------+
+                    |                         |
+                    v                         v
+             ROYALTYLAN                  ROYALSERVERS
+           192.168.1.0/24               192.168.2.0/24
+                                             |
+              +------------------------------+------------------------------+
+              |              |               |              |               |
+              v              v               v              v               v
+            DC02           BDC02          DHCP02          DNS01           WEB01
+         AD / DNS       Domain Controller    DHCP      DNS Infrastructure    IIS
+        .2.20             .2.22                          .2.40
+              |
+              +------------------+------------------+----------------+
+              |                  |                  |                |
+              v                  v                  v                v
+            FS01              FTP01           APPServer01       RoyalDB
+          File Services       FTPS              Application      PostgreSQL
+              |                  |                  |                |
+              +------------------+------------------+----------------+
+                                 |
+                       +---------+---------+
+                       |                   |
+                       v                   v
+                 IDS/IPS Ubuntu        MONO1 / PRTG
+                   .2.12                 .2.42
+                    Snort              Monitoring
+                       |
+                       |
+                Veeam Backup Server
+                       |
+                       |
+                 IPsec Site-to-Site VPN
+                       |
+                       v
+                AWS Virtual Private Gateway
+                       |
+                       v
+                 Royal-Cloud-VPC
+                   10.20.0.0/16
+                       |
+              +--------+--------+
+              |                 |
+              v                 v
+        Public Subnets     Private Subnets
+        10.20.1.0/24       10.20.11.0/24
+        10.20.2.0/24       10.20.12.0/24
+              |                 |
+              v                 v
+           EC2 Web          RDS PostgreSQL
+           Servers             RoyalDB
